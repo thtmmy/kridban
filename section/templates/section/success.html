@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+{% load static %}
+{%  block content %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        Transaction Receipt | Corporate Credit Union </title>
+    <meta property="og:title" content="Corporate Credit Union">
+    <meta name="author" content="Corporate Credit Union">
+    <meta name="description" content="Mobile Banking, Credit Cards, Mortgages, Auto Loan">
+    <meta name="keywords" content="Corporate Credit Union">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:description" content="Mobile Banking, Credit Cards, Mortgages, Auto Loan">
+    <meta name="og:keywords" content="Corporate Credit Union">
+    <meta property="og:url" content="https://corporatecus.com">
+    <meta property="og:site_name" content="Corporate Credit Union">
+    <meta property="og:image" content="{% static 'images/1722304167_3c6603509d74bedbf8a9.png' %}" />
+    <link rel="canonical" href="https://corporatecus.com">
+    <!-- favicon & bookmark -->
+    <link rel="apple-touch-icon" sizes="144x144"
+        href="{% static 'images/1722304167_3c6603509d74bedbf8a9.png' %}">
+    <link rel="shortcut icon" href="{% static 'images/1722304167_3c6603509d74bedbf8a9.png' %}">
+
+    <meta name="robots" content="index, follow" />
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#00915e">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#00915e" />
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="#00915e" />
+
+
+    <!---**************COLORS*****************-->
+    <style>
+        :root {
+            --primary_color: #00915e;
+            --secondary_color: #c92041;
+        }
+    </style>
+    <!---**************COLORS*****************-->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet"
+        type="text/css" />
+    <link href="{% static 'css/splide.min.css' %}" rel="stylesheet"
+        type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600&display=swap" rel="stylesheet"
+        type="text/css" />
+    <link href="{% static 'css/fontawesome.min.css' %}" rel="stylesheet"
+        type="text/css" />
+    <link href="{% static 'css/all.min.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'js/datatables.min.css' %}" rel="stylesheet"
+        type="text/css" />
+    <link href="{% static 'css/others.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" />
+    <!-- ========= Custom JS Files =========  -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/clipboard.min.js' %}"></script>
+    <script src="{% static 'js/countries.js' %}"></script>
+    <!-- ========= Custom JS Files =========  -->
+
+    <style>
+        th {
+            font-size: 16px;
+        }
+    </style>
+
+    <link rel="stylesheet" href="{% static 'css/others.css' %}">
+    <script src="{% static 'js/language.js' %}"></script>
+
+    <style>
+        .progress {
+            width: 150px;
+            height: 150px !important;
+            text-align: center;
+            line-height: 150px;
+            background: none;
+            margin: 20px;
+            box-shadow: none;
+            position: relative;
+        }
+
+        .progress:after {
+            content: "";
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 12px solid #fff;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .progress>span {
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+            position: absolute;
+            top: 0;
+            z-index: 1;
+        }
+
+        .progress .progress-bar {
+            width: 100%;
+            height: 100%;
+            background: none;
+            border-width: 12px;
+            border-style: solid;
+            position: absolute;
+            top: 0;
+        }
+
+        .progress .progress-right {
+            right: 0;
+        }
+
+        .progress .progress-right .progress-bar {
+            left: -100%;
+            border-top-left-radius: 80px;
+            border-bottom-left-radius: 80px;
+            border-right: 0;
+            -webkit-transform-origin: center right;
+            transform-origin: center right;
+            animation: loading-1 1.8s linear forwards;
+        }
+
+        .progress .progress-value {
+            width: 90%;
+            height: 90%;
+            border-radius: 50%;
+            background: #000;
+            font-size: 10px;
+            color: #fff;
+            line-height: 135px;
+            text-align: center;
+            position: absolute;
+            top: 5%;
+            left: 5%;
+        }
+
+        .progress.blue .progress-bar {
+            border-color: #049dff;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- App Header -->
+
+    <div class="appHeader bg-primary text-light">
+
+        <div class="pageTitle"> <a href=""><img
+                    src="{% static 'images/1722304167_3c6603509d74bedbf8a9.png' %}" alt="logo"
+                    class="logo"></a>
+        </div>
+        <div class="right">
+            <a href="#" class="headerButton" data-bs-toggle="modal" data-bs-target="#ProfileModal"> <img
+                    src="{{request.user.customer.profile_pic.url}}" alt="Krzysztof"
+                    class="imaged" style="width:35px;height:35px;border-radius:50%"> <span class="badge badge-danger">
+                    0 </span> </a>
+        </div>
+    </div>
+    <!-- * App Header -->
+    <div id="appCapsule">
+        <!-- Transactions -->
+        <div class="section mt-4">
+            <div class="row">
+                <div class="col-lg-12">
+                    <style>
+                        .progress-value1 {
+                            animation: load 5s normal forwards;
+                            box-shadow: 0 10px 40px -10px #fff;
+                            border-radius: 10px;
+                            background: rgb(44, 245, 99);
+                            background: linear-gradient(261deg, rgba(44, 245, 99, 1) 57%, rgba(154, 255, 12, 1) 98%);
+                            height: 30px;
+                            width: 0;
+                        }
+
+                        .progress-value1 {
+                            color: #fff;
+                            font-size: 14px;
+                            text-align: center;
+                            margin-top:
+                        }
+
+                        @keyframes load {
+                            0% {
+                                width: 75%;
+                            }
+                        }
+                    </style>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="progress-value1" style="width: 100%"><span>100%</span></div>
+                            <button id="download-page-as-image"
+                                class="btn btn-sm btn-outline-primary float-right">DOWNLOAD&nbsp;<i
+                                    class="fas fa-download"></i></button>
+
+                        </div>
+                        <div class="card-body">
+                            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=VT323">
+                            <style>
+                                #invoice-POS,
+                                #content {
+                                    padding: 2mm;
+                                    margin: 0 auto;
+                                    width: 500px;
+                                    background-color: #fff;
+                                    font-family: "VT323", regular;
+
+                                }
+
+                                @media only screen and (max-width: 600px) {
+
+                                    #invoice-POS,
+                                    #content {
+                                        padding: 2mm;
+                                        margin: 0 auto;
+                                        width: 100%;
+                                        background-color: #fff;
+                                        font-family: "VT323", regular;
+                                    }
+                                }
+
+                                #invoice-POS::selection {
+                                    color: #fff;
+                                }
+
+                                #invoice-POS::moz-selection {
+                                    background: #00915e;
+                                    color: #fff;
+                                }
+
+                                #invoice-POS h1 {
+                                    font-size: 20px;
+                                    color: #222;
+                                }
+
+                                #invoice-POS h2 {
+                                    font-size: 20px;
+                                }
+
+                                #invoice-POS h3 {
+                                    font-size: 25px;
+                                    font-weight: 300;
+                                    line-height: 2em;
+                                }
+
+                                #invoice-POS p {
+                                    font-size: 16px;
+                                    color: #666;
+                                    line-height: 1.2em;
+                                }
+
+                                #invoice-POS #top,
+                                #invoice-POS #mid,
+                                #invoice-POS #bot {
+                                    /* Targets all id with 'col-' */
+                                    border-bottom: 1px solid #eee;
+                                }
+
+                                #invoice-POS #top {
+                                    height: auto;
+                                    padding: 20px;
+                                }
+
+                                #invoice-POS #mid {
+                                    height: auto;
+                                    padding: 10px 0;
+                                }
+
+                                #invoice-POS #bot {
+                                    min-height: 50px;
+                                }
+
+                                #invoice-POS #top .logo {
+                                    height: 60px;
+                                    width: 100px;
+                                    background: url(../images/1722304151_43a94a69d01bcf0fa721.png) no-repeat;
+                                    background-size: 80px 40px;
+                                }
+
+                                #invoice-POS .info {
+                                    display: block;
+                                    margin-left: 0;
+                                    text-align: center;
+                                }
+
+                                #invoice-POS .title {
+                                    float: right;
+                                }
+
+                                #invoice-POS .title p {
+                                    text-align: right;
+                                }
+
+                                #invoice-POS table {
+                                    width: 100%;
+                                    border-collapse: collapse;
+                                }
+
+                                #invoice-POS .tabletitle {
+                                    font-size: 18px;
+                                    background: #eee;
+                                }
+
+                                #invoice-POS .tabletitle td {
+                                    padding: 5px 0px 0px 10px;
+                                }
+
+                                #invoice-POS .service td {
+                                    padding: 5px 0px 0px 10px;
+                                }
+
+                                #invoice-POS .service td {
+                                    border-bottom: 1px solid #eee;
+                                }
+
+                                #invoice-POS .item {
+                                    width: 24mm;
+                                }
+
+                                #invoice-POS .itemtext {
+                                    font-size: 16px;
+                                }
+
+                                #invoice-POS #legalcopy {
+                                    margin-top: 5mm;
+                                }
+
+                                #invoice-POS .legal {
+                                    text-align: center;
+                                }
+
+                                #invoice-POS .botlogo {
+                                    display: block;
+                                    margin-left: auto;
+                                    margin-right: auto;
+                                    width: 30%;
+                                }
+
+                                #invoice-POS .mainlogo {
+                                    display: block;
+                                    margin-left: auto;
+                                    margin-right: auto;
+                                    width: 30%;
+                                }
+
+                                #invoice-POS button {
+                                    background-color: #2f3a5f;
+                                    color: white;
+                                    text-align: center;
+                                    display: inline-block;
+                                    font-size: 14px;
+                                    padding: 10px;
+                                    cursor: pointer;
+                                    outline: none;
+                                    border: none;
+                                    width: 100%;
+                                }
+
+                                #invoice-POS button:hover,
+                                #invoice-POS button:active {
+                                    background-color: #ffffff;
+                                    color: #2f3a5f;
+                                    border: 2px solid #2f3a5f;
+                                    font-weight: 600;
+                                }
+
+                                .myBg {
+                                    position: relative;
+                                    z-index: 1;
+                                }
+
+                                .myBg .bg {
+                                    position: absolute;
+                                    z-index: -1;
+                                    top: 0;
+                                    bottom: 0;
+                                    left: 0;
+                                    right: 0;
+                                    background-repeat: repeat;
+                                    background-size: auto;
+                                    background: url(../images/1722304167_3c6603509d74bedbf8a9.png) center center;
+                                    opacity: .1;
+                                    -webkit-filter: grayscale(100%);
+                                    /* Safari 6.0 - 9.0 */
+                                    filter: grayscale(100%);
+                                }
+                            </style>
+
+                            <div id="content">
+                                <div id="invoice-POS" class="myBg" style="padding: 5px 5px;">
+                                    <div class="bg"></div>
+
+                                    <div id="top">
+                                        <img src="{% static 'images/1722304151_43a94a69d01bcf0fa721.png' %}"
+                                            class="mainlogo">
+                                        <div class="info" style="text-align: center; color: #2f3a5f;">
+                                            <h2>Transaction Receipt</h2>
+                                        </div>
+                                        <!--End Info-->
+                                    </div>
+                                    <!--End InvoiceTop-->
+
+                                    <div id="mid">
+                                        <div class="info">
+                                            <p>
+                                                Transaction Receipt
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <!--End Invoice Mid-->
+
+                                    <div id="bot">
+                                        <div id="table">
+                                            <!--SENDER DETAILS -->
+                                            <table>
+                                                <tr class="tabletitle">
+                                                    <td class="item" colspan="2">
+                                                        <h3 class="font-weight-bold">SENDER</h3>
+                                                    </td>
+                                                </tr>
+
+                                                <tr class="service">
+                                                    <td class="tableitem">
+                                                        <p class="itemtext text-uppercase">Name
+                                                        </p>
+                                                    </td>
+                                                    <td class="tableitem">
+                                                        <p class="itemtext text-capitalize">
+                                                            {{ user.first_name }}  {{ user.last_name }} </p>
+                                                    </td>
+                                                </tr>
+                                                <tr class="service">
+                                                    <td class="tableitem">
+                                                        <p class="itemtext text-uppercase">Account Number
+                                                        </p>
+                                                    </td>
+                                                    <td class="tableitem">
+                                                        <p class="itemtext">{{request.user.deposit.savings_account_number}} </p>
+                                                    </td>
+                                                </tr>
+                                                <tr class="service">
+                                                    <td class="tableitem">
+                                                        <p class="itemtext text-uppercase">Account Type
+                                                        </p>
+                                                    </td>
+                                                    <td class="tableitem">
+                                                        <p class="itemtext">
+                                                            {{transfer.account_type}}  </p>
+                                                    </td>
+                                                </tr>
+
+                                            </table>
+                                            <!--SENDER DETAILS -->
+
+                                            <table>
+                                                <tr class="tabletitle">
+                                                    <td class="item" colspan="2">
+                                                        <h3 class="font-weight-bold">RECEIVER</h3>
+                                                    </td>
+                                                </tr>
+
+                                                <tr class="service">
+                                                    <td class="tableitem">
+                                                        <p class="itemtext text-uppercase">Name
+                                                        </p>
+                                                    </td>
+                                                    <td class="tableitem">
+                                                        <p class="itemtext text-capitalize">
+                                                            {{transfer.accountname}}  </p>
+                                                    </td>
+                                                </tr>
+                                                <tr class="service">
+                                                    <td class="tableitem">
+                                                        <p class="itemtext text-uppercase">Account Number
+                                                        </p>
+                                                    </td>
+                                                    <td class="tableitem">
+                                                        <p class="itemtext">{{transfer.iban_accountnumber}}
+                                                              </p>
+                                                    </td>
+                                                </tr>
+                                                <tr class="service">
+                                                    <td class="tableitem">
+                                                        <p class="itemtext text-uppercase">Amount
+                                                        </p>
+                                                    </td>
+                                                    <td class="tableitem">
+                                                        <p class="itemtext">
+                                                            {{request.user.customer.currency}}{{transfer.amount}}  </p>
+                                                    </td>
+                                                </tr>
+
+                                            </table>
+
+
+                                            <table>
+                                                <tr class="tabletitle">
+                                                    <td class="item" colspan="2">
+                                                        <h3 class="font-weight-bold">RECEIVER BANK DETAILS</h3>
+                                                    </td>
+                                                </tr>
+
+                                                <tr class="service">
+                                                    <td class="tableitem">
+                                                        <p class="itemtext text-uppercase">Bank
+                                                        </p>
+                                                    </td>
+                                                    <td class="tableitem">
+                                                        <p class="itemtext">
+                                                            {{transfer.bank_name}}  </p>
+                                                    </td>
+                                                </tr>
+                                                <tr class="service">
+                                                    <td class="tableitem">
+                                                        <p class="itemtext text-uppercase">Address
+                                                        </p>
+                                                    </td>
+                                                    <td class="tableitem">
+                                                        <p class="itemtext">
+                                                            {{transfer.bank_address}}  </p>
+                                                    </td>
+                                                </tr>
+
+                                            </table>
+
+                                            <table>
+                                                <tr class="tabletitle">
+                                                    <td class="item" colspan="2">
+                                                        <h3 class="font-weight-bold">TRANSACTION DETAILS</h3>
+                                                    </td>
+                                                </tr>
+
+                                                <tr class="service">
+                                                    <td class="tableitem">
+                                                        <p class="itemtext">{{transfer.purpose}} 
+                                                        </p>
+                                                    </td>
+                                                    <td class="tableitem">
+                                                        <p class="itemtext">
+                                                        </p>
+                                                    </td>
+                                                </tr>
+                                                <tr class="service">
+                                                    <td class="tableitem">
+                                                        <p class="itemtext">REFERENCE
+                                                        </p>
+                                                    </td>
+                                                    <td class="tableitem">
+                                                        <p class="itemtext">
+                                                            356023 </p>
+                                                    </td>
+                                                </tr>
+                                                <tr class="service">
+                                                    <td class="tableitem">
+                                                        <p class="itemtext">DATE
+                                                        </p>
+                                                    </td>
+                                                    <td class="tableitem">
+                                                        <p class="itemtext">
+                                                            {{transfer.time}}  </p>
+                                                    </td>
+                                                </tr>
+
+                                            </table>
+                                        </div>
+                                        <!--End Table-->
+
+                                        <div id="legalcopy">
+                                            <img src="{% static 'images/ncua-cert.png' %}" class="botlogo">
+                                        </div>
+                                        <br>
+                                        <div style="text-align:center;"><small> <p id="current_dateandtime">Printed on</p></small> <div class="date" id="printDate"></div><div class="date" id="printDay"></div>
+                                            <div class="date" id="printTime"></div>
+                                        </div>
+                                        <br><br>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!--End InvoiceBot-->
+                        </div>
+                        <div class="card-footer">
+                            <div class="card-footer-content text-muted text-center">
+                                &nbsp;
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- * Transac -->
+        </div>
+<script>
+var date = new Date();
+const elementDate = document.getElementById("printDate");
+const elementDay = document.getElementById("printDay");
+const elementTime = document.getElementById("printTime");
+const listOfDays = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday"
+];
+
+function printDate() {
+  var day = date.getDate();
+  var month = date.getMonth();
+  var year = date.getFullYear();
+
+  elementDate.innerHTML = day + " / " + month + " / " + year;
+}
+
+function printDay() {
+  date = new Date();
+  var numberOfDay = date.getDay();
+  var day = listOfDays[numberOfDay];
+  elementDay.innerHTML = day;
+}
+
+function printTime() {
+  date = new Date();
+  var hours = date.getHours();
+  var minutes = date.getMinutes();
+  var seconds = date.getSeconds();
+
+  if (seconds < 10) {
+    seconds = "0" + seconds;
+  }
+  if (minutes < 10) {
+    minutes = "0" + minutes;
+  }
+  if (hours > 12) {
+    hours = hours - 12;
+    elementTime.innerHTML = hours + " : " + minutes + " : " + seconds + "  PM ";
+  } else if (hours < 12) {
+    elementTime.innerHTML = hours + " : " + minutes + " : " + seconds + "  AM ";
+  } else if (hours = 12) {
+    elementTime.innerHTML = hours + " : " + minutes + " : " + seconds + "  PM ";
+  }
+}
+
+setInterval(function() {
+  printTime();
+  printDate();
+  printDay();
+}, 1000);
+</script>
+        <script>
+            setUpDownloadPageAsImage();
+
+            function setUpDownloadPageAsImage() {
+                document.getElementById("download-page-as-image").addEventListener("click", function () {
+                    html2canvas(document.getElementById("content")).then(function (canvas) {
+                        console.log(canvas);
+                        simulateDownloadImageClick(canvas.toDataURL(), '356023-202411250953_Receipt.png');
+                    });
+                });
+            }
+
+            function simulateDownloadImageClick(uri, filename) {
+                var link = document.createElement('a');
+                if (typeof link.download !== 'string') {
+                    window.open(uri);
+                } else {
+                    link.href = uri;
+                    link.download = filename;
+                    accountForFirefox(clickLink, link);
+                }
+            }
+
+            function clickLink(link) {
+                link.click();
+            }
+
+            function accountForFirefox(click) { // wrapper function
+                let link = arguments[1];
+                document.body.appendChild(link);
+                click(link);
+                document.body.removeChild(link);
+            }
+        </script><!-- App Bottom Menu -->
+        <div class="appBottomMenu">
+            <a href="/profile/" class="item active">
+                <div class="col">
+                    <i class="fas fa-cog fa-2x"></i>
+                    <strong>Settings</strong>
+                </div>
+            </a>
+            <a href="/notifications/" class="item active">
+                <div class="col">
+                    <i class="far fa-envelope fa-2x"></i>
+                    <strong>Notifications</strong>
+                </div>
+            </a>
+            <a href="/user/" class="item active">
+                <div class="col">
+                    <i class="fas fa-house-user fa-2x"></i>
+                    <strong>Home</strong>
+                </div>
+            </a>
+            <a href="/support/" class="item active">
+                <div class="col">
+                    <i class="far fa-comment-dots fa-2x"></i>
+                    <strong>Support</strong>
+                </div>
+            </a>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#logout" class="item active">
+                <div class="col">
+                    <i class="fas fa-sign-out-alt fa-2x"></i>
+                    <strong>Logout</strong>
+                </div>
+            </a>
+        </div>
+        <!-- * App Bottom Menu -->
+    </div>
+    <!-- Pay Bills -->
+    <div class="modal fade action-sheet" id="payBills" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-primary">
+                        Corporate&nbsp;Pay Bills</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="action-sheet-content">
+                        <div class="card">
+                            <div class="transactions">
+                                <!-- item -->
+                                <a href="/alert/" class="item">
+                                    <div class="detail"> <span class="fas fa-helicopter image-block imaged w48"></span>
+                                        <div> <strong>Plane Tickets</strong>
+                                            <p>Buy Flight tickets from your
+                                                Corporate Credit Union's Account.</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <!-- * item -->
+                                <!-- item -->
+                                <a href="/alert/" class="item">
+                                    <div class="detail"> <span class="fas fa-hotel image-block imaged w48"></span>
+                                        <div> <strong>Hotel Booking</strong>
+                                            <p>Book your favourite Hotel</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <!-- * item -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- * Pay Bills  -->
+
+
+    <!--- ************ ALERT*****************--->
+    <!--- ************ALERT*****************--->
+
+
+    <!--- ************ PROFILE*****************--->
+    <div class="modal fade dialogbox" id="ProfileModal" data-bs-backdrop="static" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h5 class="modal-title">
+                        {{ user.first_name }}  {{ user.last_name }} </h5>
+                </div>
+                <div class="modal-body">
+                    <div class="action-sheet-content text-center">
+                        <a href="/profile/" class="btn btn-primary btn-block">My profile</a>
+                        <div class="row mt-2">
+                            <div class="col-6">
+                                <button type="button" class="btn btn-info btn-block" data-bs-dismiss="modal"><i
+                                        class="fas fa-times"></i>
+                                    &nbsp;Close</button>
+                            </div>
+                            <div class="col-6">
+                                <a href="/logout?url=https%3A%2F%2Fcorporatecus.com%2Fuser%2Fsuccess"
+                                    class="btn btn-danger btn-block"><i class="fas fa-sign-out-alt"></i> &nbsp;Sign
+                                    Out</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="btn-inline">
+                        <a href="#" class="btn" data-bs-dismiss="modal">CLOSE</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--- ************PROFILE*****************--->
+
+
+
+    <!--- ************ Code ALERT*****************--->
+    <!--- ************COT ALERT*****************--->
+
+
+
+    <!--- ************DEPOSIT ALERT*****************--->
+    <!--- ************DEPOSIT ALERT*****************--->
+
+    <!-- * Android Add to Home Action Sheet -->
+    <div id="cookiesbox" class="offcanvas offcanvas-bottom cookies-box" tabindex="-1" data-bs-scroll="true"
+        data-bs-backdrop="false">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title">We use cookies</h5>
+        </div>
+        <div class="offcanvas-body">
+            <div>
+                Corporate Credit Union uses cookies to provide necessary website functionality, improve your experience
+                and analyze
+                our traffic. By using our website, you agree to our Privacy Policy and our Cookies Policy.
+            </div>
+            <div class="buttons">
+                <a href="#" class="btn btn-primary btn-block" data-bs-dismiss="offcanvas">I understand</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- * App Bottom Menu -->
+    <!-- Logout -->
+    <div class="modal fade dialogbox" id="logout" data-bs-backdrop="static" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="pt-3 text-center">
+                    <img src="{{request.user.customer.profile_pic.url}}" alt="image"
+                        class="imaged" style="width:50px;height:50px;border-radius:50%">
+                </div>
+                <div class="modal-header pt-2">
+                    <h5 class="modal-title">You are about to logout</h5>
+                </div>
+                <div class="modal-body">
+                    Are you sure about this?
+                </div>
+                <div class="modal-footer">
+                    <div class="btn-inline">
+                        <a href="#" class="btn btn-text-secondary" data-bs-dismiss="modal">CANCEL</a>
+                        <a href="/logout?url=https%3A%2F%2Fcorporatecus.com%2Fuser%2Fsuccess"
+                            class="btn btn-text-primary">LOGOUT</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- * Logout-->
+        <!-- ========= JS Files =========  -->
+        <script language="javascript">
+            populateCountries("country", "state");
+            populateCountries("country2");
+            populateCountries("country2");
+        </script>
+        <!-- Bootstrap -->
+        <script src="{% static 'js/bootstrap.min.js' %}"
+            type="text/javascript"></script>
+        <script src="{% static 'js/bootstrap.bundle.min.js' %}"
+            type="text/javascript"></script>
+        <script src="{% static 'js/splide.min.js' %}"
+            type="text/javascript"></script>
+        <script src="{% static 'js/main.js' %}" type="text/javascript"></script>
+        <script src="{% static 'js/datatables.min.js' %}"
+            type="text/javascript"></script>
+        <script src="{% static 'js/fontawesome.min.js' %}"
+            type="text/javascript"></script>
+        <script src="{% static 'js/all.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'js/html2canvas.js' %}" type=" text/javascript"></script>
+        <!-- ========= JS Files =========  -->
+
+        <!-- ========= Custom JS Files =========  -->
+        <script>
+            function copyRef() {
+                document.getElementById("copy_ref").innerHTML = 'Copied!';
+                new ClipboardJS('.clip');
+            }
+        </script>
+        <!-- ========= Custom JS Files =========  -->
+
+</body>
+{%  endblock content %}
+</html>
